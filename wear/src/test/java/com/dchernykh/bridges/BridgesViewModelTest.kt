@@ -225,6 +225,22 @@ class BridgesViewModelTest {
         }
 
     @Test
+    fun `puts the finished board away before building the next one`() =
+        runTest(dispatcher) {
+            val model = viewModel()
+            advanceUntilIdle()
+            model.startGame()
+            advanceUntilIdle()
+            solve(model)
+
+            model.startGame()
+
+            val state = model.uiState.value
+            assertNull("the solved board is not left up behind Building...", state.puzzle)
+            assertTrue(state.bridges.isEmpty())
+        }
+
+    @Test
     fun `marks a dealt board as played so it does not come round again`() =
         runTest(dispatcher) {
             val store = FakeStore()
