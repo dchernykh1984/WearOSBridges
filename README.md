@@ -53,7 +53,7 @@ unchanged; the implementation is new.
 
 The collection ships as four plain-text files in `wear/src/main/assets/boards/`,
 copied unchanged from the Zepp OS app - 171 boards at 7x7, 700 at 9x9, 500 at
-11x11 and 300 at 13x13, 200KB in all. A test decodes every one of them, checks it
+11x11 and 300 at 13x13, 190KB in all. A test decodes every one of them, checks it
 round-trips back to the same text and that its islands and lanes are structurally
 sound; another runs the solver over them to confirm each has exactly one answer
 reachable without guessing.
