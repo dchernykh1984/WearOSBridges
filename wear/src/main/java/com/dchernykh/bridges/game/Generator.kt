@@ -1,5 +1,7 @@
 package com.dchernykh.bridges.game
 
+import kotlin.math.roundToInt
+
 // Puzzle generation.
 //
 // Boards are built, not searched for: start from one island and repeatedly throw a
@@ -214,7 +216,7 @@ private fun doubleSomeBridges(
     config: GeneratorConfig,
     random: Mulberry32,
 ) {
-    val wanted = Math.round(grid.links.size * config.doubleShare)
+    val wanted = (grid.links.size * config.doubleShare).roundToInt()
     var doubled = 0
     for (key in random.shuffled(grid.links.keys.toList())) {
         if (doubled >= wanted) break
