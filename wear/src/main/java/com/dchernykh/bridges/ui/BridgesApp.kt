@@ -60,7 +60,10 @@ fun BridgesApp(viewModel: BridgesViewModel) {
         }
 
     // The map starts with the middle of the board in the middle of the screen.
-    LaunchedEffect(layout) {
+    // Keyed on the puzzle and not only on the layout: two boards of the same size
+    // share a layout, so a new deal would otherwise open wherever the last one was
+    // dragged to.
+    LaunchedEffect(layout, puzzle) {
         if (layout != null) {
             val centre = centerCamera(layout, screenSize)
             viewModel.moveCamera(centre.x, centre.y)
