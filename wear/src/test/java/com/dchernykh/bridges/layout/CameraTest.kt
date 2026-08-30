@@ -154,3 +154,45 @@ class NeedsPanningTest {
         assertFalse(needsPanning(layout, WATCH))
     }
 }
+
+class OnCanvasTest {
+    @Test
+    fun `keeps a disc that is anywhere on the canvas`() {
+        assertTrue(discIsOnCanvas(WATCH, WATCH / 2, WATCH / 2, 20))
+        assertTrue("a corner of the canvas is still drawn", discIsOnCanvas(WATCH, 0, 0, 20))
+    }
+
+    @Test
+    fun `keeps a disc hanging over an edge`() {
+        assertTrue(discIsOnCanvas(WATCH, -19, WATCH / 2, 20))
+        assertTrue(discIsOnCanvas(WATCH, WATCH + 19, WATCH / 2, 20))
+    }
+
+    @Test
+    fun `drops a disc entirely past an edge`() {
+        // Past the right-hand edge is the one that used to be fatal: a number laid
+        // out there is laid out into a negative width.
+        assertFalse(discIsOnCanvas(WATCH, WATCH + 21, WATCH / 2, 20))
+        assertFalse(discIsOnCanvas(WATCH, -21, WATCH / 2, 20))
+        assertFalse(discIsOnCanvas(WATCH, WATCH / 2, WATCH + 21, 20))
+        assertFalse(discIsOnCanvas(WATCH, WATCH / 2, -21, 20))
+    }
+
+    @Test
+    fun `keeps every island of the largest board that the screen is looking at`() {
+        val layout = layoutOf(Level.HUGE)
+        val camera = centerCamera(layout, WATCH)
+        val kept =
+            playableCells(layout.cols, layout.rows).count { cell ->
+                discIsOnCanvas(
+                    WATCH,
+                    cellCenterX(layout, cell.col) - camera.x,
+                    cellCenterY(layout, cell.row) - camera.y,
+                    layout.radius,
+                )
+            }
+
+        assertTrue("the middle of the board is drawn", kept > 0)
+        assertTrue("and its far corners are not", kept < playableCells(layout.cols, layout.rows).size)
+    }
+}

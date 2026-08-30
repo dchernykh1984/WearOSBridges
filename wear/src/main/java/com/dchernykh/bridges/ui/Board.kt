@@ -20,6 +20,7 @@ import com.dchernykh.bridges.layout.Camera
 import com.dchernykh.bridges.layout.bridgeRects
 import com.dchernykh.bridges.layout.cellCenterX
 import com.dchernykh.bridges.layout.cellCenterY
+import com.dchernykh.bridges.layout.discIsOnCanvas
 import com.dchernykh.bridges.layout.edgeLine
 
 /**
@@ -68,7 +69,16 @@ fun BoardCanvas(
             }
         }
 
+        // Only the islands with something of themselves on the canvas. On the two
+        // largest boards most of them are off it at any moment, and an island drawn
+        // past the right-hand edge does not merely waste the work: its number is
+        // laid out into what is left of the canvas, and past the edge that is a
+        // negative width, which Compose refuses outright.
+        val viewSize = minOf(size.width, size.height).toInt()
         for (island in puzzle.islands) {
+            val x = cellCenterX(layout, island.col) - camera.x
+            val y = cellCenterY(layout, island.row) - camera.y
+            if (!discIsOnCanvas(viewSize, x, y, layout.radius)) continue
             drawIsland(
                 puzzle = puzzle,
                 layout = layout,
@@ -126,11 +136,13 @@ private fun DrawScope.drawIsland(
             fontSize = layout.numberSize.toSp(),
             fontWeight = FontWeight.Medium,
         )
+    // Drawn from the layout that has already been measured, rather than handing the
+    // text to the canvas to lay out: that overload fits the text into what is left
+    // of the canvas from the offset given, and an island near the right-hand edge
+    // leaves it a negative width to fit into.
     val measured = measurer.measure(text, style)
     drawText(
-        textMeasurer = measurer,
-        text = text,
-        style = style,
+        textLayoutResult = measured,
         topLeft = Offset(x - measured.size.width / 2f, y - measured.size.height / 2f),
     )
 }
