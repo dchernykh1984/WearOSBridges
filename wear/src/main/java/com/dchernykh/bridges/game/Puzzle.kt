@@ -82,9 +82,6 @@ class Puzzle(
     val edgesByIsland: List<IntArray>
     val crossings: List<IntArray>
 
-    /** How many bridges a finished board carries, which is half the island numbers. */
-    val total: Int
-
     init {
         // Islands sort top to bottom then left to right, so ids are stable for a
         // given set of positions however the generator produced them - which is
@@ -112,7 +109,6 @@ class Puzzle(
             }
         }
         crossings = crossing.map { it.toIntArray() }
-        total = islands.sumOf { it.required } / 2
     }
 
     fun emptyState(): BridgeState = IntArray(edges.size)
