@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="best_value">Recorde %1$s</string>
+    <string name="solved_value">Resolvidos %1$d</string>
+    <string name="time_value">Tempo %1$s</string>
+    <string name="play">Jogar</string>
+    <string name="source_builtin">Incluídos</string>
+    <string name="source_random">Aleatórios</string>
+    <string name="undo">Desfazer</string>
+    <string name="menu">Menu</string>
+    <string name="paused">Pausa</string>
+    <string name="resume">Seguir</string>
+    <string name="restart">Reiniciar</string>
+    <string name="quit">Níveis</string>
+    <string name="again">Novo jogo</string>
+    <string name="generating">A criar...</string>
+    <string name="well_done">Resolvido!</string>
+    <string name="new_best">Novo recorde</string>
+    <string name="hint_tap">Toque: ponte</string>
+    <string name="hint_drag">Arraste o mapa</string>
+    <string name="island_at">Ilha %1$d, precisa %2$d</string>
+    <string name="bridge_lane">Ponte</string>
+    <string name="no_time">-</string>
+</resources>

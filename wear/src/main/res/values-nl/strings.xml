@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="best_value">Record %1$s</string>
+    <string name="solved_value">Opgelost %1$d</string>
+    <string name="time_value">Tijd %1$s</string>
+    <string name="play">Spelen</string>
+    <string name="source_builtin">Meegeleverd</string>
+    <string name="source_random">Willekeurig</string>
+    <string name="undo">Ongedaan</string>
+    <string name="menu">Menu</string>
+    <string name="paused">Pauze</string>
+    <string name="resume">Verder</string>
+    <string name="restart">Opnieuw</string>
+    <string name="quit">Niveaus</string>
+    <string name="again">Nieuw spel</string>
+    <string name="generating">Bouwen...</string>
+    <string name="well_done">Opgelost!</string>
+    <string name="new_best">Nieuw record</string>
+    <string name="hint_tap">Tik: brug</string>
+    <string name="hint_drag">Sleep de kaart</string>
+    <string name="island_at">Eiland %1$d, nodig %2$d</string>
+    <string name="bridge_lane">Brug</string>
+    <string name="no_time">-</string>
+</resources>
