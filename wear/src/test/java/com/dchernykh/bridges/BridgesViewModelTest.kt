@@ -278,6 +278,37 @@ class BridgesViewModelTest {
         }
 
     @Test
+    fun `stays on the menu when back is pressed while a board is being built`() =
+        runTest(dispatcher) {
+            val store = FakeStore()
+            val model = viewModel(store)
+            advanceUntilIdle()
+
+            model.startGame()
+            model.showStart()
+            advanceUntilIdle()
+
+            assertEquals(Screen.START, model.uiState.value.screen)
+            assertNull("the board nobody waited for is not shown", model.uiState.value.puzzle)
+            assertTrue("and no board is spent on it", store.seen.isEmpty())
+        }
+
+    @Test
+    fun `deals one board however many times Play is tapped`() =
+        runTest(dispatcher) {
+            val store = FakeStore()
+            val model = viewModel(store)
+            advanceUntilIdle()
+
+            model.startGame()
+            model.startGame()
+            advanceUntilIdle()
+
+            assertEquals(Screen.PLAYING, model.uiState.value.screen)
+            assertEquals(1, decodeSeen(store.seen[Level.SMALL], 2).count { it })
+        }
+
+    @Test
     fun `goes back to the menu when there is nothing to deal`() =
         runTest(dispatcher) {
             val model = viewModel(boards = FakeBoards(emptyList()))

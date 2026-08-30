@@ -137,12 +137,20 @@ class BridgesViewModel(
         settings =
             viewModelScope.launch {
                 previous.join()
+                // Somebody may have left while this was queued - a second tap on
+                // Play whose board has already arrived, or a press of back. Dealing
+                // one now would spend a board out of the collection that nobody
+                // asked for and nobody would see.
+                if (_uiState.value.screen != Screen.BUILDING) return@launch
                 val dealt =
                     if (setup.source == Source.BUILT_IN) {
                         dealFromCollection(setup.level)
                     } else {
                         buildOne(setup.level)
                     }
+                // And the same again, because building one takes a visible moment
+                // and back is the obvious thing to press during it.
+                if (_uiState.value.screen != Screen.BUILDING) return@launch
                 if (dealt == null) {
                     // Nothing to play. Better to go back to the menu than to sit on
                     // a screen that says it is building something it never will.
