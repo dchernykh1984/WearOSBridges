@@ -108,6 +108,9 @@ class BridgesViewModel(
                 previous.join()
                 store.writeLevel(level)
                 store.writeSource(source)
+                // The board to keep out of the next fresh round is a board of the
+                // size just played; it means nothing in another size's pool.
+                dealtIndex = -1
                 _uiState.update {
                     it.copy(
                         level = level,

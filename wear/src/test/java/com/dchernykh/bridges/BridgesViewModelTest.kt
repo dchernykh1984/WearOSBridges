@@ -5,6 +5,7 @@ import com.dchernykh.bridges.game.Puzzle
 import com.dchernykh.bridges.game.Source
 import com.dchernykh.bridges.game.decodeGrid
 import com.dchernykh.bridges.game.decodeSeen
+import com.dchernykh.bridges.game.encodeSeen
 import com.dchernykh.bridges.store.BoardSource
 import com.dchernykh.bridges.store.ProgressStore
 import kotlinx.coroutines.Dispatchers
@@ -306,6 +307,37 @@ class BridgesViewModelTest {
 
             assertEquals(Screen.PLAYING, model.uiState.value.screen)
             assertEquals(1, decodeSeen(store.seen[Level.SMALL], 2).count { it })
+        }
+
+    @Test
+    fun `forgets the board just played when the size changes`() =
+        runTest(dispatcher) {
+            // The board to keep out of a fresh round is a position in one size's
+            // pool. Carried into another size it names a different board, and skips
+            // one there for no reason at all.
+            val store = FakeStore()
+            // A pool already worked through, so the next deal starts a fresh round
+            // - which is the only time the board just played is kept out of it.
+            store.seen[Level.MEDIUM] = encodeSeen(booleanArrayOf(true, true))
+            val model = viewModel(store)
+            advanceUntilIdle()
+
+            model.startGame()
+            advanceUntilIdle()
+            val playedInSmall = decodeSeen(store.seen[Level.SMALL], 2).indexOfFirst { it }
+
+            model.cycleLevel()
+            advanceUntilIdle()
+            model.startGame()
+            advanceUntilIdle()
+
+            // Every deal rolls from the same seed here, so the fresh round in 9x9
+            // wants the same index the 7x7 deal took - and must be free to have it.
+            assertEquals(
+                "the 9x9 round skipped the board the 7x7 deal had used",
+                playedInSmall,
+                decodeSeen(store.seen[Level.MEDIUM], 2).indexOfFirst { it },
+            )
         }
 
     @Test
