@@ -6,6 +6,15 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
+/**
+ * How many islands the round playfield could hold at the very most: islands may not
+ * sit in touching cells, so no more than one of every two on a chequerboard.
+ */
+private fun islandCapacity(
+    cols: Int,
+    rows: Int,
+): Int = playableCells(cols, rows).count { (it.col + it.row) % 2 == 0 }
+
 class PlayfieldTest {
     @Test
     fun `keeps a puzzle off the corners of its own grid`() {
@@ -38,8 +47,7 @@ class PlayfieldTest {
 
     @Test
     fun `has room for the islands every size asks for`() {
-        // Islands may not sit in touching cells, so no more than one of every two
-        // on a chequerboard - and a size asking for more than that could never be
+        // A size asking for more islands than the disc can hold could never be
         // generated at all.
         for (level in Level.entries) {
             assertTrue(
