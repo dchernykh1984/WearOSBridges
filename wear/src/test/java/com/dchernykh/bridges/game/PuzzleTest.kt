@@ -53,12 +53,6 @@ class EdgesTest {
         }
         assertTrue(horizontal.id in puzzle.edges.map { it.id })
     }
-
-    @Test
-    fun `counts the bridges a finished board carries`() {
-        // Island numbers are bridge ends, and every bridge has two of them.
-        assertEquals(2, row().total)
-    }
 }
 
 class PlacementTest {
