@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Nothing leaves the watch. From Android 12 this file, not allowBackup,
      is what governs cloud backup and device-to-device transfer, and both are
-     excluded here for the same reason allowBackup is off below API 31: the only
-     thing the app stores is a high score, and a personal best that follows the
-     player onto a different watch is not a personal best.
+     excluded here for the same reason allowBackup is off below API 31: what the
+     app stores is a best time, a count of boards solved and which of the
+     collection have been dealt, and a personal best that follows the player onto
+     a different watch is not a personal best.
 
      <exclude domain="root"/> covers every one of the app's private directories,
-     which is where the record store lives. -->
+     which is where the progress store lives. -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="root" />

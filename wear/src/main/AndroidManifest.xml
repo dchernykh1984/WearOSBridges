@@ -11,10 +11,11 @@
          records in the app's own private storage; the screen is kept awake with a
          window flag, which needs none either. -->
 
-    <!-- Backup is off. The only thing worth backing up is a high score, and
-         copying it to the user's Google Drive would let a record survive a
-         reinstall on one watch and reappear on another - which is not what a
-         personal best on a specific watch means.
+    <!-- Backup is off. The only thing worth backing up is a best time and a
+         record of which boards have been dealt, and copying that to the user's
+         Google Drive would let it survive a reinstall on one watch and reappear
+         on another - which is not what a personal best on a specific watch
+         means, and would hand a second watch a collection already half spent.
 
          It takes all three attributes to say that across the supported range:
          allowBackup switches backup off, fullBackupContent is the rule set API
