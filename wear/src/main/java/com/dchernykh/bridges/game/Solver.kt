@@ -19,7 +19,13 @@ private const val UNASSIGNED = -1
 const val DEFAULT_SOLUTION_LIMIT = 2
 const val DEFAULT_NODE_BUDGET = 120_000
 
-/** Which rules are in force. Switching one off is how the generator finds out whether it does any work. */
+/**
+ * Which rules are in force.
+ *
+ * The game always plays with all of them. Switching one off is how the tests find
+ * out whether a rule is doing any work on the shipped boards: solve without it, and
+ * if the answer stops being unique then that rule was what pinned it down.
+ */
 data class Rules(
     val crossings: Boolean = true,
     val connectivity: Boolean = true,
@@ -300,10 +306,10 @@ private fun selectIsland(board: SolverBoard): Int {
 /**
  * Solve the puzzle, counting solutions up to [limit].
  *
- * [rules] can switch a rule off. That is how the generator finds out whether a rule
- * is doing any work on a board: solve without it, and if the answer stops being
- * unique then the rule was what pinned it down. A board where every rule can be
- * switched off without changing anything is arithmetic wearing a puzzle's hat.
+ * [rules] can switch a rule off, which is what the tests use to show that the
+ * crossing and connectivity rules earn their keep on the shipped collection. A
+ * board where every rule can be switched off without changing anything is
+ * arithmetic wearing a puzzle's hat.
  */
 fun solvePuzzle(
     puzzle: Puzzle,
