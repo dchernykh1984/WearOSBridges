@@ -19,6 +19,16 @@ const val MAX_BRIDGES = 2
 /** The largest number an island may carry: four directions, two bridges each. */
 const val MAX_REQUIRED = 8
 
+/**
+ * The shortest a bridge may be, in cells.
+ *
+ * Two islands in touching cells have nothing between them to draw a bridge along,
+ * so the rules do not join them - which is why the generator never places them
+ * that way, and why a board that somehow arrives with a touching pair is read as
+ * having no edge there rather than one that cannot be seen.
+ */
+const val MIN_SPAN = 2
+
 /** An island: where it sits and how many bridge ends it needs. */
 data class Island(
     val id: Int,
@@ -276,10 +286,13 @@ data class Move(
 )
 
 /**
- * Every pair of islands that share a row or a column with no island between them.
+ * Every pair of islands that share a row or a column with room for a bridge
+ * between them.
  *
  * Walking each row and each column in sorted order yields exactly the consecutive
- * pairs - which is exactly the adjacency the rules allow - and yields each once.
+ * pairs - which is exactly the adjacency the rules allow - and yields each once. A
+ * consecutive pair in touching cells is skipped: there is nowhere between them for
+ * a bridge to be drawn, so the rules give them no edge at all.
  */
 private fun findEdges(islands: List<Island>): List<Edge> {
     val edges = mutableListOf<Edge>()
@@ -287,6 +300,7 @@ private fun findEdges(islands: List<Island>): List<Edge> {
     for (line in islands.groupBy { it.row }.values) {
         val sorted = line.sortedBy { it.col }
         for (i in 1 until sorted.size) {
+            if (sorted[i].col - sorted[i - 1].col < MIN_SPAN) continue
             edges.add(
                 Edge(
                     id = edges.size,
@@ -304,6 +318,7 @@ private fun findEdges(islands: List<Island>): List<Edge> {
     for (line in islands.groupBy { it.col }.values) {
         val sorted = line.sortedBy { it.row }
         for (i in 1 until sorted.size) {
+            if (sorted[i].row - sorted[i - 1].row < MIN_SPAN) continue
             edges.add(
                 Edge(
                     id = edges.size,

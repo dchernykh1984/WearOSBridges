@@ -7,12 +7,6 @@ package com.dchernykh.bridges.game
 
 internal val DIRECTIONS = listOf(Cell(1, 0), Cell(-1, 0), Cell(0, 1), Cell(0, -1))
 
-/**
- * The shortest a bridge may be. Two islands in neighbouring cells leave no room to
- * draw anything between them, so they are never both placed.
- */
-internal const val MIN_SPAN = 2
-
 /** Two island ids as one key, order-independent. */
 internal fun pairKey(
     a: Int,

@@ -199,3 +199,21 @@ class SolvedTest {
         assertTrue(decodeGrid("1")!!.isConnected(IntArray(0)))
     }
 }
+
+class TouchingIslandsTest {
+    @Test
+    fun `gives two islands in touching cells no edge at all`() {
+        // Nowhere between them for a bridge to be drawn, so the rules do not join
+        // them - and the board is not left with an edge that cannot be seen.
+        assertEquals(emptyList<Edge>(), decodeGrid("11")!!.edges)
+        assertEquals(emptyList<Edge>(), decodeGrid("1\n1")!!.edges)
+    }
+
+    @Test
+    fun `still joins the next island along`() {
+        val puzzle = decodeGrid("1.1")!!
+
+        assertEquals(1, puzzle.edges.size)
+        assertEquals(MIN_SPAN, puzzle.edges[0].to - puzzle.edges[0].from)
+    }
+}
