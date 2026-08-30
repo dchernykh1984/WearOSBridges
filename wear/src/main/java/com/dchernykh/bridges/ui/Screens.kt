@@ -1,6 +1,7 @@
 package com.dchernykh.bridges.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import com.dchernykh.bridges.BridgesUiState
 import com.dchernykh.bridges.BridgesViewModel
@@ -8,6 +9,8 @@ import com.dchernykh.bridges.R
 import com.dchernykh.bridges.Screen
 import com.dchernykh.bridges.game.Source
 import com.dchernykh.bridges.game.formatTime
+import com.dchernykh.bridges.layout.BoardLayout
+import com.dchernykh.bridges.layout.needsPanning
 
 // The four menus. They live one file away from the shell that hosts them because
 // they are what changes when the game gains a screen, and the shell is what does
@@ -37,24 +40,32 @@ private fun StartMenu(
     state: BridgesUiState,
     viewModel: BridgesViewModel,
 ) {
+    // Only the sizes that do not fit the glass are dragged, so only they are told
+    // to drag. On this watch 7x7 is shown whole, and a hint that names a gesture
+    // the board never needs is a hint that teaches the wrong thing.
+    val dragged =
+        remember(screenSize, state.level) {
+            needsPanning(BoardLayout(screenSize, state.level.cols, state.level.rows), screenSize)
+        }
+
     MenuOverlay(
         screenSize = screenSize,
         metrics = metrics,
         items =
-            listOf(
-                MenuItem.Line(metrics.big, ColorText, stringResource(R.string.app_name)),
-                MenuItem.Gap(metrics.gap),
-                MenuItem.Line(metrics.small, ColorMuted, bestLine(state)),
-                MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.solved_value, state.solvedCount)),
-                MenuItem.Gap(metrics.gap),
+            buildList {
+                add(MenuItem.Line(metrics.big, ColorText, stringResource(R.string.app_name)))
+                add(MenuItem.Gap(metrics.gap))
+                add(MenuItem.Line(metrics.small, ColorMuted, bestLine(state)))
+                add(MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.solved_value, state.solvedCount)))
+                add(MenuItem.Gap(metrics.gap))
                 // The size, which is digits only and so needs no translating.
-                MenuItem.Action(metrics.button, state.level.label, viewModel::cycleLevel),
-                MenuItem.Action(metrics.button, sourceLabel(state.source), viewModel::cycleSource),
-                MenuItem.Gap(metrics.gap),
-                MenuItem.Action(metrics.button, stringResource(R.string.play), viewModel::startGame),
-                MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.hint_tap)),
-                MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.hint_drag)),
-            ),
+                add(MenuItem.Action(metrics.button, state.level.label, viewModel::cycleLevel))
+                add(MenuItem.Action(metrics.button, sourceLabel(state.source), viewModel::cycleSource))
+                add(MenuItem.Gap(metrics.gap))
+                add(MenuItem.Action(metrics.button, stringResource(R.string.play), viewModel::startGame))
+                add(MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.hint_tap)))
+                if (dragged) add(MenuItem.Line(metrics.small, ColorMuted, stringResource(R.string.hint_drag)))
+            },
     )
 }
 
