@@ -18,7 +18,5 @@
     <string name="new_best">Новый рекорд</string>
     <string name="hint_tap">Тап - мост</string>
     <string name="hint_drag">Свайп - карта</string>
-    <string name="island_at">Остров %1$d, нужно %2$d</string>
-    <string name="bridge_lane">Мост</string>
     <string name="no_time">-</string>
 </resources>
