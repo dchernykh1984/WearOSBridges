@@ -128,7 +128,10 @@ class BridgesViewModel(
      */
     fun startGame() {
         val setup = _uiState.value
-        _uiState.update { it.copy(screen = Screen.BUILDING) }
+        // The board goes with the screen: the one just finished is not the one
+        // being built, and leaving it up would show it behind "Building..." until
+        // its replacement arrived.
+        _uiState.update { it.copy(screen = Screen.BUILDING, puzzle = null, bridges = emptyList(), selected = null) }
 
         val previous = settings
         settings =
