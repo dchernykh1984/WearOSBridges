@@ -5,16 +5,16 @@
 #
 # For this app:
 #
-#   tools/make-launcher-icons.sh ../AmazfitSerpent/assets/common.r/icon.png \
-#     wear/src/main/res '#14181C'
+#   tools/make-launcher-icons.sh ../AmazfitBridges/assets/common.r/icon.png \
+#     wear/src/main/res '#0D1B2A'
 #
 # Needs ImageMagick 7 (`brew install imagemagick`).
 #
 # An adaptive icon is two layers the launcher masks itself. Of its 108dp canvas
 # only the middle 72dp survives every mask, so the source - which is a full-bleed
 # round icon - is scaled to exactly that circle. Scaling it to the whole canvas
-# instead is what silently crops the outermost part of the picture: on the snake
-# icon it took the food pellet clean off.
+# instead is what silently crops the outermost part of the picture: on one of
+# these icons it took the outermost island clean off.
 #
 # By default the solid disc the glyph is drawn on is peeled away and becomes the
 # background layer, so the launcher's own mask has something to cut instead of
