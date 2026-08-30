@@ -61,12 +61,3 @@ fun playableCells(
     }
     return cells
 }
-
-/**
- * How many islands could be squeezed in at the very most: islands may not sit in
- * touching cells, so no more than one of every two cells on a chequerboard.
- */
-fun islandCapacity(
-    cols: Int,
-    rows: Int,
-): Int = playableCells(cols, rows).count { (it.col + it.row) % 2 == 0 }
