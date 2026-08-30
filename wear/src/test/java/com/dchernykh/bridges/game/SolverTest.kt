@@ -22,7 +22,7 @@ private fun boardsOf(level: Level): List<Puzzle> =
  * largest of them is not free, so the exhaustive pass runs over a sample of each
  * size and the small boards are checked in full.
  */
-class CollectionTest {
+class ShippedBoardsTest {
     @Test
     fun `every small board has exactly one solution, reachable without guessing`() {
         for ((index, puzzle) in boardsOf(Level.SMALL).withIndex()) {
@@ -106,9 +106,10 @@ class SolvePuzzleTest {
 class RulesTest {
     @Test
     fun `finds more answers once a rule is switched off`() {
-        // Two pairs side by side, each pair needing one bridge, with the two
-        // crossing routes available: the no-crossing rule is what makes the answer
-        // unique, so switching it off has to change what the solver finds.
+        // The crossing and connectivity rules have to be doing real work on the
+        // shipped boards, not merely be true of them: on at least one board of a
+        // sample, dropping both has to open up an answer that was not there
+        // before. Otherwise the collection is arithmetic wearing a puzzle's hat.
         val boards = splitBoards(File("src/main/assets/${Level.MEDIUM.assetName}").readText())
         var foundOne = false
         for (block in boards.take(60)) {
