@@ -100,6 +100,23 @@ fun discIsOnScreen(
 }
 
 /**
+ * Whether a disc of this radius, centred at this screen point, has any part of
+ * itself on the canvas at all.
+ *
+ * The square canvas, not the round glass: this is what decides whether something is
+ * worth drawing, and the corners of the canvas are still drawn even though the
+ * bezel covers them. A board larger than the screen has most of its islands off the
+ * canvas at any moment, and drawing one of those is not merely wasted work - text
+ * drawn past the right-hand edge asks the canvas for a negative width.
+ */
+fun discIsOnCanvas(
+    viewSize: Int,
+    x: Int,
+    y: Int,
+    radius: Int,
+): Boolean = x + radius >= 0 && y + radius >= 0 && x - radius <= viewSize && y - radius <= viewSize
+
+/**
  * Whether any of the board is out of sight when it is first shown, and the player
  * will therefore have to drag to see all of it.
  *

@@ -100,6 +100,36 @@ class GameScreenTest {
         rule.onNodeWithText(text(R.string.undo)).assertIsDisplayed()
     }
 
+    @Test
+    fun dealsTheLargestBoardTheCollectionHas() {
+        // The size that used to bring the app down: a board larger than the screen
+        // has most of its islands off the canvas, and one drawn past the right-hand
+        // edge took the whole activity with it. A 7x7 fits the glass whole, so only
+        // this walk ever went near it.
+        walkToBuiltIn()
+        walkToLevel(Level.HUGE)
+
+        rule.onNodeWithText(text(R.string.play)).performClick()
+        rule.waitUntil(timeoutMillis = 10_000) { onScreen(text(R.string.undo)) }
+
+        rule.onNodeWithText(text(R.string.menu)).performClick()
+        rule.waitUntil { onScreen(text(R.string.paused)) }
+        rule.onNodeWithText(text(R.string.quit)).performClick()
+        rule.waitUntil { onScreen(text(R.string.play)) }
+    }
+
+    /** Tap the size button until the one wanted is showing. */
+    private fun walkToLevel(wanted: Level) {
+        val labels = Level.entries.map { it.label }
+        repeat(Level.entries.size) {
+            if (onScreen(wanted.label)) return
+            val showing = labels.first(::onScreen)
+            rule.onNodeWithText(showing).performClick()
+            rule.waitUntil { !onScreen(showing) }
+        }
+        rule.onNodeWithText(wanted.label).assertIsDisplayed()
+    }
+
     /** Tap the source button until the collection is the one selected. */
     private fun walkToBuiltIn() {
         val builtIn = text(R.string.source_builtin)
