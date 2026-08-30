@@ -18,7 +18,5 @@
     <string name="new_best">Nuovo record</string>
     <string name="hint_tap">Tocca: ponte</string>
     <string name="hint_drag">Trascina mappa</string>
-    <string name="island_at">Isola %1$d, servono %2$d</string>
-    <string name="bridge_lane">Ponte</string>
     <string name="no_time">-</string>
 </resources>

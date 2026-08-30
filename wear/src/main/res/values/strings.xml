@@ -33,8 +33,5 @@
     <!-- The two lines under the start menu, one per way of using the board. -->
     <string name="hint_tap">Tap to link</string>
     <string name="hint_drag">Drag to move</string>
-    <!-- What a screen reader is told about a tapped island and about a bridge lane. The board is drawn, so these are all it has to go on. -->
-    <string name="island_at">Island %1$d, needs %2$d</string>
-    <string name="bridge_lane">Bridge</string>
     <string name="no_time">-</string>
 </resources>

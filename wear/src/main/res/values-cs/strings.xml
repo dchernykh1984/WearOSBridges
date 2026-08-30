@@ -18,7 +18,5 @@
     <string name="new_best">Nový rekord</string>
     <string name="hint_tap">Klepni: most</string>
     <string name="hint_drag">Táhni mapu</string>
-    <string name="island_at">Ostrov %1$d, potreba %2$d</string>
-    <string name="bridge_lane">Most</string>
     <string name="no_time">-</string>
 </resources>
