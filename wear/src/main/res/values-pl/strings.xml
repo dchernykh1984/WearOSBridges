@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="best_value">Rekord %1$s</string>
+    <string name="solved_value">Ukończone %1$d</string>
+    <string name="time_value">Czas %1$s</string>
+    <string name="play">Graj</string>
+    <string name="source_builtin">Gotowe</string>
+    <string name="source_random">Losowe</string>
+    <string name="undo">Cofnij</string>
+    <string name="menu">Menu</string>
+    <string name="paused">Pauza</string>
+    <string name="resume">Wznów</string>
+    <string name="restart">Od nowa</string>
+    <string name="quit">Poziomy</string>
+    <string name="again">Nowa gra</string>
+    <string name="generating">Tworzenie...</string>
+    <string name="well_done">Rozwiązane!</string>
+    <string name="new_best">Nowy rekord</string>
+    <string name="hint_tap">Stuknij: most</string>
+    <string name="hint_drag">Przesuń mapę</string>
+    <string name="island_at">Wyspa %1$d, potrzeba %2$d</string>
+    <string name="bridge_lane">Most</string>
+    <string name="no_time">-</string>
+</resources>

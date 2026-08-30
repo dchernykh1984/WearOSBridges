@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The screen strings, in the eleven languages the Zepp OS original shipped.
+     Android resolves the watch's locale to the right table on its own, so
+     Kazakh - which Zepp OS had no device-language code for - finally reaches the
+     people it was translated for.
+
+     Adding a language means adding one values-<code>/strings.xml with every key
+     below; Android Lint's MissingTranslation check is an error here, so a table
+     that is short of a key fails the build rather than falling back silently. -->
+<resources>
+    <!-- The name the launcher shows, and the title over the start menu. -->
+    <string name="app_name" translatable="false">Island Bridges</string>
+    <!-- The value can be a dash rather than a clock, which is why it is a string: a size nobody has finished has no best time to show. -->
+    <string name="best_value">Best %1$s</string>
+    <!-- How many boards have been finished at this size, from this source. -->
+    <string name="solved_value">Solved %1$d</string>
+    <string name="time_value">Time %1$s</string>
+    <string name="play">Play</string>
+    <!-- Where a board comes from: the shipped collection, or one the watch builds on the spot. -->
+    <string name="source_builtin">Built-in</string>
+    <string name="source_random">Random</string>
+    <string name="undo">Undo</string>
+    <string name="menu">Menu</string>
+    <string name="paused">Paused</string>
+    <string name="resume">Resume</string>
+    <string name="restart">Restart</string>
+    <string name="quit">Levels</string>
+    <string name="again">New board</string>
+    <!-- Shown while the watch builds a board, which takes a moment on the largest sizes. -->
+    <string name="generating">Building...</string>
+    <string name="well_done">Solved!</string>
+    <string name="new_best">New best!</string>
+    <!-- The two lines under the start menu, one per way of using the board. -->
+    <string name="hint_tap">Tap to link</string>
+    <string name="hint_drag">Drag to move</string>
+    <!-- What a screen reader is told about a tapped island and about a bridge lane. The board is drawn, so these are all it has to go on. -->
+    <string name="island_at">Island %1$d, needs %2$d</string>
+    <string name="bridge_lane">Bridge</string>
+    <string name="no_time">-</string>
+</resources>

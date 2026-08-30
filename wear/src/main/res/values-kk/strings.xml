@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="best_value">Рекорд %1$s</string>
+    <string name="solved_value">Шешілді %1$d</string>
+    <string name="time_value">Уақыт %1$s</string>
+    <string name="play">Ойнау</string>
+    <string name="source_builtin">Дайын</string>
+    <string name="source_random">Кездейсоқ</string>
+    <string name="undo">Болдырмау</string>
+    <string name="menu">Мәзір</string>
+    <string name="paused">Кідіріс</string>
+    <string name="resume">Жалғастыру</string>
+    <string name="restart">Қайта</string>
+    <string name="quit">Деңгейлер</string>
+    <string name="again">Жаңа ойын</string>
+    <string name="generating">Жасалуда...</string>
+    <string name="well_done">Шешілді!</string>
+    <string name="new_best">Жаңа рекорд</string>
+    <string name="hint_tap">Түрту - көпір</string>
+    <string name="hint_drag">Сырғыту - карта</string>
+    <string name="island_at">Арал %1$d, керек %2$d</string>
+    <string name="bridge_lane">Копир</string>
+    <string name="no_time">-</string>
+</resources>

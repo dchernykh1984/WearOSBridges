@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="best_value">Рекорд %1$s</string>
+    <string name="solved_value">Решено %1$d</string>
+    <string name="time_value">Время %1$s</string>
+    <string name="play">Играть</string>
+    <string name="source_builtin">Готовые</string>
+    <string name="source_random">Случайные</string>
+    <string name="undo">Отменить</string>
+    <string name="menu">Меню</string>
+    <string name="paused">Пауза</string>
+    <string name="resume">Дальше</string>
+    <string name="restart">Заново</string>
+    <string name="quit">Уровни</string>
+    <string name="again">Новая игра</string>
+    <string name="generating">Создание...</string>
+    <string name="well_done">Готово!</string>
+    <string name="new_best">Новый рекорд</string>
+    <string name="hint_tap">Тап - мост</string>
+    <string name="hint_drag">Свайп - карта</string>
+    <string name="island_at">Остров %1$d, нужно %2$d</string>
+    <string name="bridge_lane">Мост</string>
+    <string name="no_time">-</string>
+</resources>
