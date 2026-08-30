@@ -63,8 +63,9 @@ android {
             // a release one instead of colliding with it. Without the suffix,
             // pushing a debug build to a watch that already has the published app
             // fails outright on the signature mismatch, and the only way through
-            // is to uninstall the app - and with it the high scores that are the
-            // most interesting thing to test against.
+            // is to uninstall the app - and with it the best times and the
+            // half-played collection that are the most interesting thing to test
+            // against.
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
         }
