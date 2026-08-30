@@ -12,12 +12,13 @@ package com.dchernykh.bridges.game
 // boards this generator produces have to be the ones the Zepp OS app produced from
 // the same seed, and that means the same arithmetic.
 
-/** The next float in [0, 1). */
+/** One integer of state, advanced a round at a time. */
 class Mulberry32(
     seed: Int,
 ) {
     private var state: Int = seed
 
+    /** The next float in [0, 1). */
     fun nextFloat(): Float {
         state += 0x6D2B79F5.toInt()
         var t = state
@@ -35,8 +36,9 @@ class Mulberry32(
     /** A shuffled copy (Fisher-Yates). The input is left alone. */
     fun <T> shuffled(items: List<T>): List<T> {
         val copy = items.toMutableList()
-        for (i in copy.indices.reversed()) {
-            if (i == 0) break
+        // Down to one, not to zero: the last element has only itself to swap with,
+        // and drawing for it would consume a number the original never spent.
+        for (i in copy.lastIndex downTo 1) {
             val j = nextInt(i + 1)
             val swap = copy[i]
             copy[i] = copy[j]
